@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RecipeBox Index!!!</title>
+</head>
+<body>
+    This is where an index of all the recipe titles!
+    <ul>
+        {% for foo in data %}
+        <li>
+            Recipe ID: {{foo.id}}
+            <a href='/recipe/{{foo.id}}'>{{ foo.title }},</a>
+            by <a href='/author/{{foo.author.id}}'>{{ foo.author }}</a>
+        </li>
+        <!-- <ul>
+            <li>
+                {{ foo.body }}
+            </li>
+        </ul> -->
+        {% endfor %}
+    </ul>
+</body>
+</html>

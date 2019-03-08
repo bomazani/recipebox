@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Author Profile</title>
+  </head>
+  <body>
+    This is the author's info & links to their recipes!
+
+    <ul>
+      {{author.user.username}}
+      {{author.bio}}
+      {% for recipe in data %}
+
+      <li>
+        <a href="/recipe/{{ recipe.id }}">{{ recipe.title }}</a>
+      </li>
+
+      {% endfor %}
+    </ul>
+  </body>
+</html>
