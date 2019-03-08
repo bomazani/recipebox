@@ -16,6 +16,5 @@ def author(request, author_id):
     return render(request, 'author.html', context)
 
 def recipe(request, recipe_id):
-    # items = Recipe.objects.get(id=recipe_id)
     items = get_object_or_404(Recipe, id=recipe_id)
     return render(request, 'recipe.html', {'data':items})
