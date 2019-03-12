@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from recipebox.models import Author, Recipe
 from recipebox.forms import RecipeAddForm, AuthorAddForm
-
+from django.contrib.auth.models import User
 
 def index(request):
     items = Recipe.objects.all()
@@ -31,10 +31,10 @@ def recipeadd(request):
         if form.is_valid():
             data = form.cleaned_data
 
-            RecipeItem.objects.create(
+            Recipe.objects.create(
                 title=data['title'],
-                description=['description'],
-                time_required=['time_required'],
+                description=data['description'],
+                time_required=data['time_required'],
                 body=data['body'],
                 author=data['author']
             )
@@ -53,10 +53,15 @@ def authoradd(request):
 
         if form.is_valid():
             data = form.cleaned_data
-
-            AuthorItem.objects.create(
-                user=data['user'],
-                bio=['bio']
+            user = User.objects.create_user(
+                username=data['username'],
+                first_name=data['first_name'],
+                last_name=data['last_name'],
+                email=data['email']
+                )
+            Author.objects.create(
+                user=user,
+                bio=data['bio']
             )
             return render(request, 'thanks.html')
 

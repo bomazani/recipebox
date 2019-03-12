@@ -14,7 +14,7 @@ class Author(models.Model):
 class Recipe(models.Model):
     title = models.CharField(max_length=124)
     description = models.CharField(max_length=124, null=True, blank=True)
-    time_required = models.DurationField(null=True, blank=True)
+    time_required = models.IntegerField(default=1)
     body = models.TextField(null=True, blank=True)
     author = models.ForeignKey(
         Author,
