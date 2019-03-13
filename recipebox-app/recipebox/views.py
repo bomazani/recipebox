@@ -95,7 +95,7 @@ def signup_view(request):
                 user=user,
                 bio=data['bio']
             )
-            return HttpResponseRedirect(reverse('homepage'))
+            return HttpResponseRedirect(reverse('index'))
     else:
         form = SignupForm()
     return render(request, html, {'form': form})
