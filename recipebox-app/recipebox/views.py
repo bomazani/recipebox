@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
@@ -72,6 +72,32 @@ def authoradd(request):
 
     else:
         form = AuthorAddForm()
+    return render(request, html, {'form': form})
+
+def signup_view(request):
+    # ??? demo has html = 'generic_form.html' ... maybe shouldn't use 'signup.html' here.
+    html = 'signup.html'
+    form = None
+
+    if request.method == "POST":
+        form = SignupForm(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+            user = user.objects.create_user(
+                username=data['username'],
+                first_name=data['first_name'],
+                last_name=data['last_name'],
+                email=data['email']
+            )
+            login(request, user)
+            Author.objects.create(
+                user=user,
+                bio=data['bio']
+            )
+            return HttpResponseRedirect(reverse('homepage'))
+    else:
+        form = SignupForm()
     return render(request, html, {'form': form})
 
 def login(request):

@@ -14,3 +14,6 @@ class AuthorAddForm(forms.Form):
     last_name = forms.CharField(label="User's Last Name", max_length=120)
     email = forms.EmailField(label="User's Email", )
     bio = forms.CharField(label="Enter new user's bio.", widget=forms.Textarea)
+
+class SignupForm(forms.Form):
+    pass
