@@ -100,8 +100,23 @@ def signup_view(request):
         form = SignupForm()
     return render(request, html, {'form': form})
 
-def login(request):
-    pass
+def login_view(request):
+    html = 'gereric_form.html'
+
+    form = None
+
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            user = authenticate(username=data['username'], password=data['password'])
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(request.GET.get('next', '/'))
+    else:
+        form = LoginForm()
+    return render(request, html, {'form': form})
+
 
 def logout(request):
     pass
