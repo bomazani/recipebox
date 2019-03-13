@@ -68,3 +68,10 @@ def authoradd(request):
     else:
         form = AuthorAddForm()
     return render(request, html, {'form': form})
+
+def login(request):
+    pass
+
+def logout(request):
+    pass
+    
