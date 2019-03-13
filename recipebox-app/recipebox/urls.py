@@ -32,6 +32,8 @@ urlpatterns = [
     path('author/<int:author_id>', views.author),
     path('recipeadd/', recipeadd),
     path('authoradd/', authoradd),
+    path('signup/', views.signup_view),
+    path('login/', views.login_view),
 ]
 
 if settings.DEBUG:

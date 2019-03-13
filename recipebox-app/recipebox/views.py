@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
-from recipebox.models import Author, Recipe
-from recipebox.forms import RecipeAddForm, AuthorAddForm
 from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import reverse
+
+from recipebox.models import Author, Recipe
+from recipebox.forms import RecipeAddForm, AuthorAddForm, SignupForm, LoginForm
 
 def index(request):
     items = Recipe.objects.all()
@@ -21,6 +25,7 @@ def recipe(request, recipe_id):
     items = get_object_or_404(Recipe, id=recipe_id)
     return render(request, 'recipe.html', {'data':items})
 
+@login_required()
 def recipeadd(request):
     html = 'recipeadd.html'
     form = None
