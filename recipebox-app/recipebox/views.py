@@ -75,8 +75,7 @@ def authoradd(request):
     return render(request, html, {'form': form})
 
 def signup_view(request):
-    # ??? demo has html = 'generic_form.html' ... maybe shouldn't use 'signup.html' here.
-    html = 'signup.html'
+    html = 'generic_form.html'
     form = None
 
     if request.method == "POST":
