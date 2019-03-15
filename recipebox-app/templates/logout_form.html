@@ -1,5 +1,17 @@
-<form action="/LogoutForm/" method="post">
+<!-- <form action="/LogoutForm/" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Submit" />
-</form>
+</form> -->
+
+
+<!-- Per Corey Schafer -->
+{% block content %}
+<h2>You have been logged out.</h2>
+<div>
+    <a href="{% url 'login' %}">Log In Again</a>
+</div>
+<div>
+    <a href="{% url 'index' %}">Return to Recipe Index</a>
+</div>
+{% endblock content %}

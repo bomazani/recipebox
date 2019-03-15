@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import reverse
@@ -30,7 +30,7 @@ def recipe(request, recipe_id):
 def recipeadd(request):
     html = 'recipeadd.html'
     form = None
-
+    
     if request.method == "POST":
         form = RecipeAddForm(request.POST)
 
@@ -52,7 +52,8 @@ def recipeadd(request):
 
 @staff_member_required()
 def authoradd(request):
-    html = 'authoradd.html'
+    # html = 'authoradd.html'
+    html = 'generic_form.html'
     form = None
 
     if request.method == "POST":
@@ -102,8 +103,8 @@ def signup_view(request):
     return render(request, html, {'form': form})
 
 def login_view(request):
-    # html = 'generic_form.html'
-    html = 'login_form.html'
+    html = 'generic_form.html'
+    # html = 'login_form.html'
     form = None
 
     if request.method == "POST":
@@ -121,10 +122,9 @@ def login_view(request):
                 return HttpResponseRedirect(request.GET.get('next', '/'))
     else:
         form = LoginForm()
-        # form = SignupForm
     return render(request, html, {'form': form})
 
 
-def logout(request):
-    pass
-    
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect("/")
