@@ -104,12 +104,10 @@ def signup_view(request):
 
 def login_view(request):
     html = 'generic_form.html'
-    # html = 'login_form.html'
     form = None
 
     if request.method == "POST":
         form = LoginForm(request.POST)
-        # form = LoginForm(data=request.POST)
 
         if form.is_valid():
             data = form.cleaned_data
@@ -123,7 +121,6 @@ def login_view(request):
     else:
         form = LoginForm()
     return render(request, html, {'form': form})
-
 
 def logout_view(request):
     logout(request)
