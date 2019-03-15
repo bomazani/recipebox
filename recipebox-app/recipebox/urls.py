@@ -20,7 +20,9 @@ from recipebox.views import index, recipe, author
 from django.conf import settings
 from django.urls import include, path
 from recipebox.models import *
-from recipebox.views import recipeadd, authoradd
+from recipebox.views import recipeadd, authoradd, login_view, signup_view
+# two videos suggest the following line:
+# from django.contrib.auth import views as auth_views
 
 admin.site.register(Author)
 admin.site.register(Recipe)
@@ -32,8 +34,11 @@ urlpatterns = [
     path('author/<int:author_id>', views.author),
     path('recipeadd/', recipeadd),
     path('authoradd/', authoradd),
-    path('signup/', views.signup_view),
-    path('login/', views.login_view),
+    path('signup/', views.signup_view, name='signup'),
+    path('login/', views.login_view, name='login'),
+    # Corey Shafer recommends:
+    # path('login/', auth_views.LoginView.as_view(template_name='login_form.html'), name='login'),
+    # path('logout/', auth_views.LogoutView.as_view(template_name='logout_form.html'), name='logout'),
 ]
 
 if settings.DEBUG:

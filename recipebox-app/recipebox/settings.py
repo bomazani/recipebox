@@ -30,6 +30,8 @@ ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = ['example.com', '.example.com']
 
 LOGIN_URL = '/login/'
+# Pulled following line from a Login video (not sure if it needs to be used)
+# LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 # Application definition

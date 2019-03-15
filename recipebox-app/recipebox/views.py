@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import reverse
 
 from recipebox.models import Author, Recipe
@@ -49,6 +50,7 @@ def recipeadd(request):
         form = RecipeAddForm()
     return render(request, html, {'form': form})
 
+@staff_member_required()
 def authoradd(request):
     html = 'authoradd.html'
     form = None
@@ -62,7 +64,7 @@ def authoradd(request):
                 username=data['username'],
                 first_name=data['first_name'],
                 last_name=data['last_name'],
-                email=data['email']
+                email=data['email'],
                 )
             Author.objects.create(
                 user=user,
@@ -83,7 +85,7 @@ def signup_view(request):
 
         if form.is_valid():
             data = form.cleaned_data
-            user = user.objects.create_user(
+            user = User.objects.create_user(
                 username=data['username'],
                 first_name=data['first_name'],
                 last_name=data['last_name'],
@@ -100,20 +102,26 @@ def signup_view(request):
     return render(request, html, {'form': form})
 
 def login_view(request):
-    html = 'gereric_form.html'
-
+    # html = 'generic_form.html'
+    html = 'login_form.html'
     form = None
 
     if request.method == "POST":
         form = LoginForm(request.POST)
+        # form = LoginForm(data=request.POST)
+
         if form.is_valid():
             data = form.cleaned_data
-            user = authenticate(username=data['username'], password=data['password'])
+            user = authenticate(
+                username=data['username'],
+                password=data['password']
+            )
             if user is not None:
                 login(request, user)
                 return HttpResponseRedirect(request.GET.get('next', '/'))
     else:
         form = LoginForm()
+        # form = SignupForm
     return render(request, html, {'form': form})
 
 
