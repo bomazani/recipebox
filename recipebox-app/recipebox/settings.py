@@ -26,7 +26,13 @@ SECRET_KEY = '5^%@k^bb%*%#8pqhntlfrx@rcniv+i1es37fz+3vy3h$a_%jq1'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+# // When submitting to production:
+# ALLOWED_HOSTS = ['example.com', '.example.com']
 
+LOGIN_URL = '/login'
+# Pulled following line from a Login video (not sure if it needs to be used)
+# LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
 

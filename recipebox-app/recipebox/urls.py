@@ -15,12 +15,11 @@ Including another URLconf
 """
 from recipebox import views
 from django.contrib import admin
-# from django.urls import path
 from recipebox.views import index, recipe, author
 from django.conf import settings
 from django.urls import include, path
 from recipebox.models import *
-from recipebox.views import recipeadd, authoradd
+from recipebox.views import recipeadd, authoradd, login_view, signup_view
 
 admin.site.register(Author)
 admin.site.register(Recipe)
@@ -30,8 +29,11 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('recipe/<int:recipe_id>', views.recipe),
     path('author/<int:author_id>', views.author),
-    path('recipeadd/', recipeadd),
-    path('authoradd/', authoradd),
+    path('recipeadd/', views.recipeadd),
+    path('authoradd/', views.authoradd),
+    path('signup/', views.signup_view, name='signup'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
 ]
 
 if settings.DEBUG:
