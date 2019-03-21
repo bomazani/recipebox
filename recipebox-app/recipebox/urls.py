@@ -20,6 +20,7 @@ from recipebox.views import index, recipe, author
 from django.conf import settings
 from django.urls import include, path
 from recipebox.models import *
+from recipebox.views import recipeadd, authoradd
 
 admin.site.register(Author)
 admin.site.register(Recipe)
@@ -27,10 +28,10 @@ admin.site.register(Recipe)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    # path('recipe/', views.Recipes, name='recipe'),
-    # path('author/', views.Authors, name='author'),
     path('recipe/<int:recipe_id>', views.recipe),
     path('author/<int:author_id>', views.author),
+    path('recipeadd/', recipeadd),
+    path('authoradd/', authoradd),
 ]
 
 if settings.DEBUG:

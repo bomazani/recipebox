@@ -7,15 +7,14 @@
 <body>
     Have fun trying out this delicious recipe!
 
-    <ul>
-        <li>
-            {{ data.title }}, by <a href='/author/{{data.author.id}}'>{{ data.author }}</a>
-        </li>
-        <ul>
-            <li>
-                {{ data.body }}
-            </li>
-        </ul>
-    </ul>
+    <h1>
+        {{ data.title }}, by <a href='/author/{{data.author.id}}'>{{ data.author }}</a>
+    </h1>
+        <p>
+            <h2>{{ data.description }}</h2>
+            <p>{{ data.duration }}</p>
+            <p>{{ data.body }}</p>
+        </p>
+    </h1>
 </body>
 </html>
